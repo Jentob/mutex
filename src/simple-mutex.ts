@@ -1,6 +1,6 @@
 /**
  * A handle representing an acquired lock.
- * Must be disposed of via `release()` or `Symbol.dispose` once to unlock the
+ * Must be disposed of via `release()` or `Symbol.dispose` to unlock the
  * mutex for the next waiting task.
  */
 export type LockHandle = Disposable & {
@@ -31,11 +31,14 @@ export type LockHandle = Disposable & {
  *     await criticalOperation();
  * });
  * ```
+ *
  * @example Use a lock handle with `using`
  * ```ts ignore
+ * // Lock is released when _lock goes out of scope
  * using _lock = await mutex.acquire();
  * await criticalOperation();
  * ```
+ *
  * @example Acquire and release manually
  * ```ts ignore
  * const lock = await mutex.acquire();
@@ -93,6 +96,9 @@ export class SimpleMutex {
      * The returned handle must be released when the protected operation has
      * completed. Calling `release()` or disposing of the handle multiple times
      * is safe.
+     *
+     * @returns A promise that resolves to a lock handle. The handle must be
+     * released or disposed of to allow the next queued task to proceed.
      */
     acquire(): Promise<LockHandle> {
         return new Promise<LockHandle>((resolve, _reject) => {

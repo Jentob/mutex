@@ -4,18 +4,18 @@ import { SimpleMutex } from "./simple-mutex.ts";
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 Deno.test("isLocked reflects mutex state", async () => {
-    const mutex = new SimpleMutex()
+    const mutex = new SimpleMutex();
 
-    assertEquals(mutex.isLocked, false)
+    assertEquals(mutex.isLocked, false);
 
-    const lock = await mutex.acquire()
+    const lock = await mutex.acquire();
 
-    assertEquals(mutex.isLocked, true)
+    assertEquals(mutex.isLocked, true);
 
-    lock.release()
+    lock.release();
 
-    assertEquals(mutex.isLocked, false)
-})
+    assertEquals(mutex.isLocked, false);
+});
 
 Deno.test("mutex allows only one active critical section", async () => {
     const mutex = new SimpleMutex();

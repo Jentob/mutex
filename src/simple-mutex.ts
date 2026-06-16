@@ -67,7 +67,7 @@ export class SimpleMutex {
         } else {
             this.#isLocked = false;
         }
-    };
+    }
 
     #createLockHandle(): LockHandle {
         let releaseCalled = false;

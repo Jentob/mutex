@@ -1,0 +1,22 @@
+{
+    "name": "@tobias/mutex",
+    "version": "0.1.0",
+    "license": "MIT",
+    "imports": {
+        "@std/assert": "jsr:@std/assert@^1.0.19"
+    },
+    "exports": {
+        ".": "./src/mod.ts"
+    },
+    "publish": {
+        "include": [
+            "LICENSE",
+            "README.md",
+            "src/**/*.ts"
+        ]
+    },
+    "fmt": {
+        "indentWidth": 4,
+        "lineWidth": 100
+    }
+}
